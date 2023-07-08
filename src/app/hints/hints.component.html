@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="btn-group">
+    <!-- Add hint button -->
+    <div class="btn" style="border: unset">
+      <button class="btn btn-success" (click)="addHint()">+ Add</button>
+    </div>
+
+    <!-- Dropdown -->
+    <div
+      #dropdownDiv
+      id="dropdownDiv"
+      class="dropdown btn"
+      [class.disabled]="hints.length > 0 ? false : true"
+      [class.active]="hints.length > 0 ? true : false"
+      style="border: unset"
+    >
+      <button
+        #hintDropdown
+        id="hintDropdown"
+        class="btn btn-outline-dark dropdown-toggle"
+        [class.disabled]="hints.length > 0 ? false : true"
+        [class.active]="hints.length > 0 ? true : false"
+        [class.poo]="false"
+        type="button"
+        id="dropdownMenuButton"
+        [textContent]="activeHint?.name || 'No Hint Selected'"
+      ></button>
+      <div *ngIf="hints.length > 0" class="dropdown-menu">
+        <button
+          *ngFor="let hint of hints"
+          type="button"
+          class="dropdown-item"
+          (click)="selectHint(hint.fakeId!)"
+        >
+          {{ hint.name }}
+        </button>
+      </div>
+    </div>
+
+    <div class="btn" style="border: unset">
+      <button
+        class="btn btn-danger"
+        *ngIf="hints.length > 0"
+        (click)="removeHint()"
+      >
+        - Remove
+      </button>
+    </div>
+    <!-- End Dropdown -->
+  </div>
+  <div class="container p-1 m-1">
+    <div *ngIf="hints.length > 0">
+      <div class="form-group p-1 m-1">
+        <label for="mapName">Hint Name</label>
+        <input
+          #mapName
+          type="text"
+          class="form-control"
+          id="mapName"
+          placeholder="Enter Name"
+          (input)="updateHintName($event)"
+          autocomplete="off"
+          [value]="activeHint?.name || ''"
+        />
+        <div class="invalid-feedback">Please enter a valid hint name.</div>
+      </div>
+      <div class="form-group p-1 m-1">
+        <div class="row">
+          <div class="col">
+            <label for="xValue">X</label>
+            <input
+              #xValue
+              type="number"
+              class="form-control"
+              id="xValue"
+              placeholder="Enter X"
+              [value]="activeHint?.x || 0"
+              (input)="updateX($event)"
+            />
+          </div>
+          <div class="col">
+            <label for="yValue">Y</label>
+            <input
+              #yValue
+              type="number"
+              class="form-control"
+              id="yValue"
+              placeholder="Enter Y"
+              [value]="activeHint?.y || 0"
+              (input)="updateY($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group p-1 m-1">
+        <label for="mapDescription">Hint Text</label>
+        <input
+          #mapDescription
+          type="text"
+          class="form-control"
+          id="mapDescription"
+          placeholder="Enter Description"
+          (input)="updateHintText($event)"
+          autocomplete="off"
+          [value]="activeHint?.hintText || ''"
+        />
+        <div class="invalid-feedback">
+          Please enter a valid hint description.
+        </div>
+        <div class="form-group p-1 m-1">
+          <label for="mapImage">Hint Image</label>
+          <input
+            #mapImage
+            type="file"
+            class="form-control"
+            id="mapImage"
+            placeholder="Upload Image"
+            (change)="updateHintImage($event)"
+            autocomplete="off"
+          />
+          <div class="invalid-feedback">Please enter a valid hint image.</div>
+        </div>
+        <div class="form-group p-1 m-1 center text-center">
+          <img [src]="activeHint?.src" style="max-width: 100%" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="hints.length == 0">
+    <br />
+    <h3 class="text-center">No Hints For This Map</h3>
+  </div>
+</div>

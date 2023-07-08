@@ -1,0 +1,45 @@
+<div class="text-center">
+  <h1>All Sites</h1>
+</div>
+
+<div class="col-12 p-5 m-1 align-items-center justify-content-center">
+  <div class="form-group p-1 m-1">
+    <label for="filter">Filter</label>
+    <input
+      #filter
+      type="text"
+      class="form-control"
+      id="filter"
+      placeholder="Filter"
+      (input)="updateFilter($event)"
+      autocomplete="off"
+    />
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Website</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let site of sites.slice(sitesPerPage * (pageNumber - 1), sitesPerPage * pageNumber)">
+            <td><a [href]=site.link><button class="btn">{{site.siteName}}</button></a></td>
+            <td><a href="{{site.siteWebsite}}"><button class="btn btn-link">{{site.siteWebsite}}</button></a></td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8 text-center">
+        <div *ngIf="sites.length > 0" class="d-flex justify-content-between align-items-center">
+          <button class="col btn btn-outline-secondary" (click)="decreasePage()" >&lt;</button>
+          <div class="col">
+            Page {{pageNumber}} / {{totalPages}}
+          </div>
+          <button class="col btn btn-outline-secondary" (click)="increasePage()" >&gt;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

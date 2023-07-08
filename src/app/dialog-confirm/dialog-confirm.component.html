@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row m-1 p-1">
+    <div class="col-12 text-center center">
+      <mat-icon class="icon-display p-1 m-1" [style.color]="color">{{ icon }}</mat-icon>
+      <h3 class="m-1 p-1"><strong>{{ title }}</strong>
+      </h3>
+    </div>
+    <div class="row m-1 p-1">
+      <div class="col-12 text-center center">
+        <span>{{ message }}</span>
+      </div>
+    </div>
+    <div class="row m-1 p-1">
+      <div class="col-12 text-center center">
+        <button class="btn btn-success m-1 p-2" (click)="confirm()">
+          Confirm
+        </button>
+        <button class="btn btn-danger m-1 p-2" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

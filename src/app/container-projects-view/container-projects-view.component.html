@@ -1,0 +1,144 @@
+<div class="col">
+  <h3 class="text-center p-1">Projects For Section</h3>
+  <div class="form-group p-1 m-1">
+    <label for="filter">Filter</label>
+    <input
+      #filter
+      type="text"
+      class="form-control"
+      id="filter"
+      placeholder="Filter"
+      (input)="updateFilter($event)"
+      autocomplete="off"
+    />
+  </div>
+  <div class="form-group p-1 m-1">
+    <div class="btn-group">
+      <input
+        mdbRadio
+        type="radio"
+        class="btn-check"
+        name="options"
+        id="option1"
+        autocomplete="off"
+        value="option1"
+        [checked]="true"
+        [(ngModel)]="selectedOption"
+        (change)="updateProjects()"
+      />
+      <label class="btn btn-light" for="option1">Show All</label>
+      <input
+        mdbRadio
+        type="radio"
+        class="btn-check"
+        name="options"
+        id="option2"
+        value="option2"
+        autocomplete="off"
+        [(ngModel)]="selectedOption"
+        (change)="updateProjects()"
+      />
+      <label class="btn btn-light" for="option2">Show Included</label>
+      <input
+        mdbRadio
+        type="radio"
+        class="btn-check"
+        name="options"
+        id="option3"
+        value="option3"
+        autocomplete="off"
+        [(ngModel)]="selectedOption"
+        (change)="updateProjects()"
+      />
+      <label class="btn btn-light" for="option3">Show Excluded</label>
+    </div>
+  </div>
+  <div class="form-group p-1 m-1">
+    <button class="btn btn-success m-1 p-2" (click)="selectAll()">
+      Select All ( {{ projects.length }} )
+    </button>
+    <button class="btn btn-danger m-1 p-2" (click)="deselectAll()">
+      Deselect All ( {{ sectionProjects.length }} )
+    </button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">Project ID</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        [ngStyle]="{
+          'background-color': projectInSection(project.fakeId)
+            ? 'rgb(194, 249, 194)'
+            : 'rgb(255, 207, 207)'
+        }"
+        (click)="toggleProject(project.fakeId)"
+        (contextmenu)="activateProject($event, project.fakeId)"
+        *ngFor="
+          let project of projects.slice(
+            projectsPerPage * (pageNumber - 1),
+            projectsPerPage * pageNumber
+          )
+        "
+      >
+        <th scope="row">
+          <ng-container
+            *ngIf="projectInSection(project.fakeId); else notIncluded"
+          >
+            <mat-icon class="icon-display p-1 m-1" style="color: green"
+              >check</mat-icon
+            >
+          </ng-container>
+          <ng-template #notIncluded>
+            <mat-icon class="icon-display p-1 m-1" style="color: rgb(138, 0, 0)"
+              >close</mat-icon
+            >
+          </ng-template>
+        </th>
+        <td><img src="{{ project.src }}" width="30" height="30" /></td>
+        <td>{{ project.projectId }}</td>
+        <td>{{ project.projectName }}</td>
+        <td>{{ getXPosition(project.fakeId) }}</td>
+        <td>{{ getYPosition(project.fakeId) }}</td>
+        <td>
+          <mat-icon
+            class="icon-display p-1 m-1"
+            [style]="
+              'color:' + (activeProject?.id == project.id ? 'red' : 'black')
+            "
+            >room</mat-icon
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8 text-center">
+        <div
+          *ngIf="projects.length > 0"
+          class="d-flex justify-content-between align-items-center"
+        >
+          <button
+            class="col col-3 btn"
+            (click)="decreasePage()"
+          >
+            &lt;
+          </button>
+          <div class="col col-6">Page {{ pageNumber }} / {{ totalPages }}</div>
+          <button
+            class="col col-3 btn"
+            (click)="increasePage()"
+          >
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="container-fluid">
+  <div class="row m-1 p-1">
+    <div class="col-12 text-center center">
+      <button class="btn btn-success m-1 p-2" (click)="saveAllClick()">
+        <strong>SAVE ALL CHANGES</strong>
+      </button>
+      <button class="btn btn-danger m-1 p-2" (click)="revertAllClick()">
+        <strong>REVERT ALL CHANGES</strong>
+      </button>
+    </div>
+  </div>
+  <ul class="nav nav-pills p-1 m-1">
+    <li class="nav-item">
+      <button
+        #overviewTab
+        id="overviewTab"
+        class="nav-link active"
+        (click)="openOverview()"
+      >
+        Overview
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        #beaconsTab
+        id="beaconsTab"
+        class="nav-link"
+        (click)="openBeacons()"
+      >
+        Beacon Locations
+      </button>
+    </li>
+    <li class="nav-item">
+      <button #roomsTab id="roomsTab" class="nav-link" (click)="openRooms()">
+        Rooms
+      </button>
+    </li>
+    <li class="nav-item">
+      <button #infoTab id="infoTab" class="nav-link" (click)="openInfo()">
+        Map Info
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        #projectsTab
+        id="projectsTab"
+        class="nav-link"
+        (click)="openProjects()"
+      >
+        Projects
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        #routingTab
+        id="routingTab"
+        class="nav-link"
+        (click)="openRouting()"
+      >
+        Routing Points
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        #hintsTab
+        id="hintsTab"
+        class="nav-link"
+        (click)="openHints()"
+      >
+        Hints
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div #overviewView id="overviewView" class="tab-pane active">
+      <app-overview-setup></app-overview-setup>
+    </div>
+    <div #beaconsView id="beaconsView" class="tab-pane">
+      <app-beacon-setup></app-beacon-setup>
+    </div>
+    <div #roomsView id="roomsView" class="tab-pane">
+      <app-room-setup></app-room-setup>
+    </div>
+    <div #infoView id="infoView" class="tab-pane">
+      <app-site-setup></app-site-setup>
+    </div>
+    <div #projectsView id="projectsView" class="tab-pane">
+      <app-container-projects-view></app-container-projects-view>
+    </div>
+    <div #routingView id="routingView" class="tab-pane">
+      <app-routing-component></app-routing-component>
+    </div>
+    <div #hintsView id="hintsView" class="tab-pane">
+      <app-hints></app-hints>
+    </div>
+  </div>
+</div>

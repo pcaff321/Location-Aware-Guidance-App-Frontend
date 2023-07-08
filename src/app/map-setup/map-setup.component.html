@@ -1,0 +1,43 @@
+<div class="text-center">
+  <h1>{{ this.mapId != null ? 'Update Map' : 'Create Map' }}</h1>
+</div>
+
+<div class="container d-flex w-100">
+  <div class="col col-2"></div>
+  <div class="col col-8 justify-content-center align-items-center">
+    <form (submit)="submitForm($event)">
+      <div class="form-group p-1 m-1">
+        <label for="mapName">Map Name</label>
+        <input
+          #mapName
+          type="text"
+          class="form-control"
+          id="mapName"
+          placeholder="Enter Name"
+          (input)="updateMapName($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid map name.</div>
+      </div>
+      <div class="form-group p-1 m-1">
+        <label for="mapImage">Map Image</label>
+        <input
+          #mapImage
+          type="file"
+          class="form-control"
+          id="mapImage"
+          placeholder="Upload Image"
+          (change)="updateMapImage($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid map image.</div>
+      </div>
+
+      <div class="text-center">
+        <button #submitButton type="submit" class="btn btn-primary">
+          {{ this.mapId != null ? 'Update' : 'Create' }} Map
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

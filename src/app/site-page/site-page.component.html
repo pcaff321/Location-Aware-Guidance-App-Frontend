@@ -1,0 +1,15 @@
+<div class="text-center">
+  <h1>Site Configuration</h1>
+</div>
+<a [href]="'/create-site?siteId=' + site?.id"><button class="btn btn-primary">Go To Overview Page</button></a>
+<h1 #siteName id="siteName" class="text-center p-3" contentEditable="true">Test Site</h1>
+<div class="container p-2">
+  <div class="row">
+    <div class="col">
+      <app-image-clicker #map id="map"></app-image-clicker>
+    </div>
+    <div class="col">
+      <app-beacons-container></app-beacons-container>
+    </div>
+  </div>
+</div>

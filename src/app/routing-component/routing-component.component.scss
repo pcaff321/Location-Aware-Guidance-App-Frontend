@@ -1,0 +1,44 @@
+#rotateMode{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color:black;
+    position:relative;
+   
+  }
+  
+  #left{
+      position:absolute;
+    top:50%;
+    left:0px;
+    transform:translateY(-50%);
+  }
+  
+  #right{
+   position:absolute;
+    top:50%;
+    right:0px;
+    transform:translateY(-50%);
+  }
+  
+  #up{
+       position:absolute;
+    top:0px;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  
+  #down{
+      position:absolute;
+    bottom:0px;
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+:host ::ng-deep .mat-slide-toggle .mat-slide-toggle-bar {
+    background-color: #fcfcfc00 ;
+}
+
+:host ::ng-deep  .mat-slide-toggle .mat-slide-toggle-thumb {
+    background-color: #000000 ;
+}

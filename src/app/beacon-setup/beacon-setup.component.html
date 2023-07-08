@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="btn-group ">
+    <div class="btn" style="border: unset">
+      <button class="btn btn-success" (click)="addBeacon()">
+        + Add
+      </button>
+    </div>
+
+    <!-- Dropdown -->
+    <div
+      #dropdownDiv
+      id="dropdownDiv"
+      class="dropdown btn disabled"
+      style="border: unset"
+    >
+      <button
+        #beaconDropdown
+        id="beaconDropdown"
+        class="btn btn-outline-dark dropdown-toggle disabled"
+        type="button"
+        id="dropdownMenuButton"
+      >
+        LOADING
+      </button>
+      <div *ngIf="beaconsExist" class="dropdown-menu">
+        <button
+          *ngFor="let beacon of beacons"
+          type="button"
+          class="dropdown-item"
+          (click)="selectBeacon(beacon.fakeId!.toString())"
+        >
+          {{ beacon.beaconName }}
+        </button>
+      </div>
+    </div>
+
+    <div class="btn" style="border: unset">
+      <button class="btn btn-danger" *ngIf="beaconsExist" (click)="removeBeacon()">
+        - Remove
+      </button>
+    </div>
+  </div>
+  <!-- End of Dropdown -->
+  <div class="container p-1 m-1">
+    <div *ngIf="beaconsExist">
+      <form>
+        <div class="form-group p-1 m-1">
+          <label for="beaconName">Beacon Location Name</label>
+          <input
+          #beaconName
+            type="text"
+            class="form-control"
+            id="beaconName"
+            placeholder="Enter Name"
+            [value]="selectedBeacon!.beaconName"
+            (input)="updateBeaconName($event)"
+          />
+        </div>
+        <div class="form-group p-1 m-1">
+          <label for="beaconID">Beacon ID</label>
+          <select #beaconID id="beaconID" class="form-control" [value]="selectedBeacon!.networkDeviceId"
+          (input)="updateBeaconID($event)">
+            <option selected>None Selected</option>
+            <option *ngFor="let device of networkDevices" [value]="device.id">{{device.deviceName}} [{{device.deviceMAC}}] [[{{device.id}}]]</option>
+          </select>
+        </div>
+        <div class="form-group p-1 m-1 col-3">
+          <label for="positionX">Range</label>
+          <input
+          #beaconRange
+            type="number"
+            class="form-control"
+            id="positionX"
+            placeholder="200"
+            [value]="selectedBeacon!.range"
+            (input)="updateBeaconRange($event)"
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group p-1 m-1 col-3">
+            <label for="positionX">Position X</label>
+            <input
+            #positionX
+              type="number"
+              class="form-control"
+              id="positionX"
+              placeholder="0"
+              [value]="selectedBeacon!.locationX"
+              (input)="updateBeaconLocationX($event)"
+            />
+          </div>
+          <div class="form-group p-1 m-1 col-3">
+            <label for="positionY">Position Y</label>
+            <input
+            #positionY
+              type="number"
+              class="form-control"
+              id="positionY"
+              placeholder="0"
+              [value]="selectedBeacon!.locationY"
+              (input)="updateBeaconLocationY($event)"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div *ngIf="!beaconsExist">
+      <br>
+      <h3 class="text-center">No Beacons</h3>
+    </div>
+  </div>
+</div>

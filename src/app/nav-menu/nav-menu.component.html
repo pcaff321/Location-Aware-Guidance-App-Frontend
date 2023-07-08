@@ -1,0 +1,114 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+  >
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">FYPWeb</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="d-inline-block text-center center p-1 m-1" ngbDropdown #myDrop3="ngbDropdown">
+        <a
+          type="button"
+          class="nav-link text-dark"
+          id="dropdownManual"
+          ngbDropdownAnchor
+          (focus)="myDrop3.open()"
+        >
+          Manage
+        </a>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual" class="text-center center p-1 m-1">
+          <input type="password" class="form-control text-center center p-1 m-1" value="{{adminPassword}}" (change)="updatePassword($event)"/>
+          <button class="btn btn-primary text-center center p-1 m-1" (submit)="submitPassword()" (click)="submitPassword()">Submit</button>
+        </div>
+      </div>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li
+            *ngIf="isAuthenticated | async"
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+          >
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <a
+                type="button"
+                class="nav-link text-dark"
+                id="dropdownManual"
+                ngbDropdownAnchor
+                (focus)="myDrop.open()"
+              >
+                Create
+              </a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <a class="nav-link text-dark" [routerLink]="['/create-site']"
+                  >Create Site</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/create-map']"
+                  >Create Map</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/manage-device']"
+                  >Create Device</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/manage-project']"
+                  >Create Project</a
+                >
+              </div>
+            </div>
+          </li>
+          <li
+            *ngIf="isAuthenticated | async"
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+          >
+            <div class="d-inline-block" ngbDropdown #myDrop2="ngbDropdown">
+              <a
+                type="button"
+                class="nav-link text-dark"
+                id="dropdownManual"
+                ngbDropdownAnchor
+                (focus)="myDrop2.open()"
+              >
+                View
+              </a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <a class="nav-link text-dark" [routerLink]="['/my-sites']"
+                  >All Sites</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/my-maps']"
+                  >All Maps</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/my-devices']"
+                  >All Devices</a
+                >
+                <a class="nav-link text-dark" [routerLink]="['/my-projects']"
+                  >All Projects</a
+                >
+              </div>
+            </div>
+          </li>
+          <li>
+            <!-- <app-login-menu></app-login-menu> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

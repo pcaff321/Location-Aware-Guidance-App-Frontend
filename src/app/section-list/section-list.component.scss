@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+button {
+  @extend .btn;
+  @extend .btn-light;
+  @extend .p-1;
+  @extend .m-1;
+}
+button.active {
+  @extend .btn-success;
+  background-color: lightgreen;
+  color: black;
+  border-color: black;
+}

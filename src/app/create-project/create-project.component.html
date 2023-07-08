@@ -1,0 +1,143 @@
+<div class="text-center">
+  <h1>{{ this.activeProject ? "Update Project" : "Create Project" }}</h1>
+</div>
+
+<div class="container d-flex w-100">
+  <div class="col col-2"></div>
+  <div class="col col-8 justify-content-center align-items-center">
+    <form (submit)="submitForm($event)">
+      <div class="row m-1 p-1">
+      <div class="col-3">
+        <label for="projectId">Project ID</label>
+        <input
+          #projectId
+          type="text"
+          class="form-control"
+          id="projectId"
+          placeholder="Enter ID"
+          (input)="updateProjectID($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid project ID.</div>
+      </div>
+      <div class="col-9">
+        <label for="projectName">Project Name</label>
+        <input
+          #projectName
+          type="text"
+          class="form-control"
+          id="projectName"
+          placeholder="Enter Name"
+          (input)="updateProjectName($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid project name.</div>
+        </div>
+      </div>
+      <div class="row m-1 p-1">
+      <div class="col-12">
+        <label for="projectDescription">Project Description</label>
+        <textarea
+          #projectDescription
+          type="text"
+          class="form-control"
+          id="projectDescription"
+          placeholder="Enter Description"
+          (input)="updateProjectDescription($event)"
+          autocomplete="off"
+        >
+        </textarea>
+      </div>
+      </div>
+      <div class="row m-1 p-1">
+        <div class="col-6">
+          <label for="projectOwner">Project Owner</label>
+          <input
+            #projectOwner
+            type="text"
+            class="form-control"
+            id="projectOwner"
+            placeholder="Enter Owner"
+            (input)="updateProjectOwner($event)"
+            autocomplete="off"
+          />
+        </div>
+        <div class="col-6">
+          <label for="contactEmail">Contact Email</label>
+          <input
+            #contactEmail
+            type="text"
+            class="form-control"
+            id="contactEmail"
+            placeholder="Enter Email"
+            (input)="updateContactEmail($event)"
+            autocomplete="off"
+          />
+        </div>
+        </div>
+        <div class="row m-1 p-1">
+        <div class="col-12">
+          <label for="supervisor">Supervisor</label>
+          <input
+            #supervisor
+            type="text"
+            class="form-control"
+            id="supervisor"
+            placeholder="Enter Supervisor"
+            (input)="updateSupervisor($event)"
+            autocomplete="off"
+          />
+        </div>
+        </div>
+      <div class="row m-1 p-1">
+        <div class="col-12">
+          <label for="projectWebsite">Project Website</label>
+          <input
+            #projectWebsite
+            type="text"
+            class="form-control"
+            id="projectWebsite"
+            placeholder="Enter Website"
+            (input)="updateProjectWebsite($event)"
+            autocomplete="off"
+          />
+        </div>
+        </div>
+      <div class="row m-1 p-1">
+      <div class="col-12">
+        <label for="projectImage">Project Image</label>
+        <input
+          #projectImage
+          type="file"
+          class="form-control"
+          id="projectImage"
+          placeholder="Upload Image"
+          (change)="updateMapImage($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid project image.</div>
+      </div>
+      </div>
+      <div class="row m-1 p-1">
+      <div class="col-12">
+        <label for="tags">Tags ( separated with ';' )</label>
+        <input
+          #tags
+          type="text"
+          class="form-control"
+          id="tags"
+          placeholder="Enter Tags"
+          (input)="updateTags($event)"
+          autocomplete="off"
+        />
+      </div>
+      </div>
+      <div class="text-center">
+        <button #submitButton type="submit" class="btn btn-primary">
+          {{ this.activeProject ? "Update" : "Create" }} Project
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

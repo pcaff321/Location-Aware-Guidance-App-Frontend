@@ -1,0 +1,131 @@
+<div>
+  <div #mapMeta id="mapMeta" class="pb-sm-2 m-sm-1 container border bg-light">
+    <h4 class="pt-sm-1 text-center">Section Info</h4>
+
+    <div class="p-1 row">
+      <div class="p-1 col">
+        <label for="sectionName">Section Name</label>
+        <input
+        #sectionName
+          type="text"
+          class="form-control"
+          id="locationName"
+          placeholder="Location Name"
+          [value]="activeSection?.sectionName"
+          (input)="updateSectionName(sectionName.value)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div
+    #lengthContainer
+    id="lengthContainer"
+    class="pb-sm-2 m-sm-1 container border bg-light"
+  >
+    <h4 class="pt-sm-1 text-center">Map Sizing</h4>
+    <div class="p-1 row">
+      <div class="p-1 col">
+        <button mat-mini-fab style="background-color: black;" [style.color]="activeLocation ? 'lightgreen' : 'white'" (click)="activeLocation = !activeLocation">
+          <mat-icon>room</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="p-1 row">
+      <div class="p-1 col">
+        <label for="firstPointX">First Point X</label>
+        <input
+          #firstPointX
+          type="number"
+          class="p-1 form-control"
+          id="firstPointX"
+          placeholder="First Point X"
+          [value]="map?.sizingLocation1X"
+          (input)="updateFirstPointX(firstPointX.value)"
+        />
+      </div>
+      <div class="p-1 col">
+        <label for="firstPointY">First Point Y</label>
+        <input
+          #firstPointY
+          type="number"
+          class="p-1 form-control"
+          id="firstPointY"
+          placeholder="First Point Y"
+          [value]="map?.sizingLocation1Y"
+          (input)="updateFirstPointY(firstPointY.value)"
+        />
+      </div>
+    </div>
+
+    <div class="p-1 row">
+      <div class="p-1 col">
+        <label for="firstPointX">Second Point X</label>
+        <input
+          #secondPointX
+          type="number"
+          class="p-1 form-control"
+          id="secondPointX"
+          placeholder="Second Point X"
+          [value]="map?.sizingLocation2X"
+          (input)="updateSecondPointX(secondPointX.value)"
+        />
+      </div>
+      <div class="p-1 col">
+        <label for="firstPointY">Second Point Y</label>
+        <input
+          #secondPointY
+          type="number"
+          class="p-1 form-control"
+          id="secondPointY"
+          placeholder="Second Point Y"
+          [value]="map?.sizingLocation2Y"
+          (input)="updateSecondPointY(secondPointY.value)"
+        />
+      </div>
+    </div>
+
+    <div class="p-1 row">
+      <div class="p-1 col">
+        <label for="firstPointY">Length Between Two Points (m)</label>
+        <input
+          #length
+          type="number"
+          class="p-1 form-control"
+          id="length"
+          placeholder="Length Between Two Points"
+          [value]="map?.metresBetweenPoints"
+          (input)="updateLength(length.value)"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+  #exitContainer
+  id="exitContainer"
+  class="pb-sm-2 m-sm-1 container border bg-light"
+>
+<h2><strong>Exits</strong></h2>
+<button [ngClass]="'btn ' + (this.addExit ? 'btn-success' : 'btn-outline-success')" (click)="this.addExit = !this.addExit">
+  {{ this.addExit ? 'Click On Routing Point To Add' : 'Add Exit' }}
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [ngStyle]="{'background-color': false ? 'rgb(194, 249, 194)' : 'unset'}" (click)="(null)" *ngFor="let exit of doors">
+      <td>{{ exit.name }}</td>
+      <td class="center">
+        <button class="btn btn-danger center text-center" (click)="removeDoor(exit.fakeId)">
+          REMOVE
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>

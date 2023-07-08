@@ -1,0 +1,22 @@
+<div *ngIf="map">
+  <h3 class="text-center">
+    {{ activeSection?.sectionName }} [ {{ map.mapName }} ]
+  </h3>
+  <div class="text-center center">
+    <img
+      #mapImage
+      id="mapImage"
+      class="no-interaction"
+      (load)="onImageLoad()"
+      draggable="false"
+      [src]="map.src"
+      alt="mapExample"
+      (click)="imageClick($event)"
+      (contextmenu)="imageRightClick($event)"
+      style="max-width: 100%; max-height: 400px"
+    />
+  </div>
+</div>
+<div *ngIf="!map">
+  <h3 class="text-center">No Map Selected</h3>
+</div>

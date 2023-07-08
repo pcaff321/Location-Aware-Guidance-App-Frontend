@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="btn-group">
+    <!-- Dropdown -->
+    <div
+      #dropdownDiv
+      id="dropdownDiv"
+      class="dropdown btn"
+      style="border: unset"
+      [class.disabled]="!areasExist"
+    >
+      <button
+        #areasDropdown
+        id="areasDropdown"
+        class="btn btn-outline-dark dropdown-toggle disabled"
+        type="button"
+        id="dropdownMenuButton"
+        style="z-index: 1000"
+      >
+        LOADING
+      </button>
+      <div *ngIf="areasExist" class="dropdown-menu">
+        <button
+          *ngFor="let area of areas"
+          type="button"
+          class="dropdown-item"
+          (click)="selectArea(area.fakeId!)"
+          style="z-index: 1001"
+        >
+          {{ area.sectionName }} [ {{ area.innerMap?.mapName }} ]
+        </button>
+      </div>
+    </div>
+    <!-- End of Dropdown -->
+  </div>
+  <div class="container p-1 p-1">
+    <div *ngIf="areasExist">
+      <form>
+        <div class="row p-1 m-1">
+          <div #adjustCol id="adjustCol" class="col m-1 p-1">
+            <span *ngIf="!adjustSize"><strong>Adjust Position</strong></span>
+            <span *ngIf="adjustSize" (click)="adjustSize = false"
+              >Adjust Position</span
+            >
+            <mat-slide-toggle
+              class="m-1 p-1"
+              style="z-index: 40"
+              [checked]="adjustSize"
+              (change)="toggleSize($event)"
+            ></mat-slide-toggle
+            ><span *ngIf="!adjustSize" (click)="adjustSize = true"
+              >Adjust Size</span
+            >
+            <span *ngIf="adjustSize"><strong>Adjust Size</strong></span>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col">
+            <label for="topLeftX">Top Left X</label>
+            <input
+              #topLeftX
+              type="number"
+              class="form-control"
+              id="topLeftX"
+              placeholder="Enter Top Left X"
+              [value]="selectedSubsection?.topLeftX"
+              (input)="updateTopLeftX($event)"
+            />
+          </div>
+          <div class="col">
+            <label for="topLeftY">Top Left Y</label>
+            <input
+              #topLeftY
+              type="number"
+              class="form-control"
+              id="topLeftY"
+              placeholder="Enter Top Left Y"
+              [value]="selectedSubsection?.topLeftY"
+              (input)="updateTopLeftY($event)"
+            />
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col">
+            <label for="bottomRightX">Bottom Right X</label>
+            <input
+              #bottomRightX
+              type="number"
+              class="form-control"
+              id="bottomRightX"
+              placeholder="Enter Bottom Right X"
+              [value]="selectedSubsection?.bottomRightX"
+              (input)="updateBottomRightX($event)"
+            />
+          </div>
+          <div class="col">
+            <label for="bottomRightY">Bottom Right Y</label>
+            <input
+              #bottomRightY
+              type="number"
+              class="form-control"
+              id="bottomRightY"
+              placeholder="Enter Bottom Right Y"
+              [value]="selectedSubsection?.bottomRightY"
+              (input)="updateBottomRightY($event)"
+            />
+          </div>
+        </div>
+      </form>
+      <br />
+      <br />
+      <h2><strong>Entrances</strong></h2>
+      <button [ngClass]="'btn ' + (this.addDoor ? 'btn-success' : 'btn-outline-success')" (click)="this.addDoor = !this.addDoor">
+        {{ this.addDoor ? 'Click On Routing Point To Add' : 'Add Door' }}
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [ngStyle]="{'background-color': this.activeVertex == door.vertex ? 'rgb(194, 249, 194)' : 'unset'}" (click)="(null)" *ngFor="let door of doors">
+            <td>{{ door.name }}</td>
+            <td class="center">
+              <button class="btn btn-danger center text-center" (click)="removeDoor(door.fakeId)">
+                REMOVE
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!areasExist">
+      <br />
+      <h3 class="text-center">No Areas</h3>
+    </div>
+  </div>
+</div>

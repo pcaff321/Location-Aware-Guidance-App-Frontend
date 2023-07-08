@@ -1,0 +1,15 @@
+<ul style="list-style: none">
+    <li *ngFor="let section of sections">
+          <button
+        [class.active]="section.innerMap?.mapId === selectedMap?.mapId"
+        (dblclick)="selectSection(section.id, true)"
+        (click)="selectSection(section.id)"
+        [ngStyle]="getColor(section.subsections.length)"
+      >
+        {{section.sectionName}}
+      </button>
+      <button *ngIf="depth < 3" class="btn btn-success" [title]='"Add Section To " + section.innerMap?.mapName' (click)="addSection(section.id)">+</button>
+      <button *ngIf="section.subsections.length == 0" class="btn btn-danger" [title]='"Remove Section " + section.outerMap?.mapName' (click)="removeSection(section.id)"><strong>-</strong></button>
+      <app-section-list [depth]="depth + 1" [sections]="section.subsections"></app-section-list>
+    </li>
+  </ul>

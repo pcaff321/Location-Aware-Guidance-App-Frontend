@@ -1,0 +1,7 @@
+<app-section-list *ngIf="startSection" [sections]="sectionsA"></app-section-list>
+
+<div *ngIf="!startSection" class="container p-1 text-center center">
+    <h1> You have not set a start section for this site yet. </h1>
+    <h3> Please create a start section. </h3>
+    <button class="btn btn-success" (click)="addSection(null)">Add Start Section</button>
+</div>

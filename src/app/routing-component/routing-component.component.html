@@ -1,0 +1,114 @@
+<div class="form-group p-1 m-1">
+  <div #connectionsCol id="connectionsCol" class="col m-1 p-1">
+    <span *ngIf="!hideConnections"><strong>Show Connections</strong></span>
+    <span *ngIf="hideConnections" (click)="hideConnections = false">Show Connections</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="hideConnections"
+      (change)="toggleConnections($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!hideConnections" (click)="hideConnections = true">Hide Connections</span>
+    <span *ngIf="hideConnections"><strong>Hide Connections</strong></span>
+  </div>
+  <div #directedCol id="directedCol" class="col m-1 p-1">
+    <span *ngIf="!directed"><strong>Undirected </strong></span>
+    <span *ngIf="directed" (click)="directed = false">Undirected</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="directed"
+      (change)="toggleDirected($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!directed" (click)="directed = true">Directed</span>
+    <span *ngIf="directed"><strong>Directed</strong></span>
+  </div>
+  <div #straightCol id="straightCol" class="col m-1 p-1">
+    <span *ngIf="!freeLine"><strong>Straight Line</strong></span>
+    <span *ngIf="freeLine" (click)="freeLine = false">Straight Line</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="freeLine"
+      (change)="toggleLineOrientation($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!freeLine" (click)="freeLine = true">Free Lines</span>
+    <span *ngIf="freeLine"><strong>Free Lines</strong></span>
+  </div>
+  <div #relatedCol id="relatedCol" class="col m-1 p-1">
+    <span *ngIf="!showRelated"><strong>Show Related</strong></span>
+    <span *ngIf="showRelated" (click)="showRelated = false">Show Related</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="showRelated"
+      (change)="toggleShowRelated($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!showRelated" (click)="showRelated = true">Hide Related</span>
+    <span *ngIf="showRelated"><strong>Hide Related</strong></span>
+  </div>
+  <div #addCol id="addCol" class="col m-1 p-1">
+    <span *ngIf="!addVertex"><strong>Add Edge</strong></span>
+    <span *ngIf="addVertex" (click)="addVertex = false">Add Edge</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="addVertex"
+      (change)="toggleAddVertex($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!addVertex" (click)="addVertex = true">Add Vertex</span>
+    <span *ngIf="addVertex"><strong>Add Vertex</strong></span>
+  </div>
+  <div #connectCol id="connectCol" class="col m-1 p-1">
+    <span *ngIf="!connectSpecific"><strong>Connect To Previous</strong></span>
+    <span *ngIf="connectSpecific" (click)="connectSpecific = false">Connect To Previous</span>
+    <mat-slide-toggle
+      class="m-1 p-1"
+      style="z-index: 40"
+      [checked]="connectSpecific"
+      (change)="toggledConnected($event)"
+    ></mat-slide-toggle
+    ><span *ngIf="!connectSpecific" (click)="connectSpecific = true">Connect To Specific</span>
+    <span *ngIf="connectSpecific"><strong>Connect To Specific</strong></span>
+  </div>
+  <div class="btn-group m-1 p-1">
+    <div *ngIf="vertices.length > 0" class="btn m-1 p-1">
+      <button
+        #removeVertexButton
+        id="removeVertexButton"
+        class="btn btn-danger"
+        (click)="removeVertex()"
+      >
+        Remove Vertex
+      </button>
+    </div>
+     <!-- Dropdown -->
+     <div
+     #dropdownDiv
+     id="dropdownDiv"
+     class="dropdown btn disabled m-1 p-1"
+     style="border: unset"
+   >
+     <button
+       #vertexDropdown
+       id="vertexDropdown"
+       class="btn btn-outline-dark dropdown-toggle disabled"
+       type="button"
+       id="dropdownMenuButton"
+     >
+       LOADING
+     </button>
+     <div *ngIf="verticesExist" class="dropdown-menu">
+       <button
+         *ngFor="let vertex of vertices"
+         type="button"
+         class="dropdown-item"
+         (click)="selectVertex(vertex.fakeId!.toString())"
+       >
+         {{ vertex.vertexName }}
+       </button>
+     </div>
+   </div>
+   <!-- End of Dropdown -->
+  </div>
+</div>

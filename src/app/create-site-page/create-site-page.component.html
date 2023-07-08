@@ -1,0 +1,197 @@
+<div class="text-center">
+  <h1>Site Overview</h1>
+</div>
+
+<div *ngIf="retrievedSite">
+  <a [href]="'/site?siteId=' + retrievedSite.id"
+    ><button class="btn btn-primary">Go To Configuration</button></a
+  >
+  <h1 class="center text-center">{{ retrievedSite.siteName }}</h1>
+</div>
+
+<div class="container p-2">
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center p-1">Projects For Site</h3>
+      <div class="form-group p-1 m-1">
+        <label for="filter">Filter</label>
+        <input
+          #filter
+          type="text"
+          class="form-control"
+          id="filter"
+          placeholder="Filter"
+          (input)="updateFilter($event)"
+          autocomplete="off"
+        />
+      </div>
+      <div class="form-group p-1 m-1">
+        <div class="btn-group">
+          <input
+            mdbRadio
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="option1"
+            autocomplete="off"
+            value="option1"
+            [checked]="true"
+            [(ngModel)]="selectedOption"
+            (change)="updateProjects()"
+          />
+          <label class="btn btn-light" for="option1">Show All</label>
+          <input
+            mdbRadio
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="option2"
+            value="option2"
+            autocomplete="off"
+            [(ngModel)]="selectedOption"
+            (change)="updateProjects()"
+          />
+          <label class="btn btn-light" for="option2">Show Included</label>
+          <input
+            mdbRadio
+            type="radio"
+            class="btn-check"
+            name="options"
+            id="option3"
+            value="option3"
+            autocomplete="off"
+            [(ngModel)]="selectedOption"
+            (change)="updateProjects()"
+          />
+          <label class="btn btn-light" for="option3">Show Excluded</label>
+        </div>
+      </div>
+      <div class="form-group p-1 m-1">
+        <button class="btn btn-success m-1 p-2" (click)="selectAll()">
+          Select All ( {{ projects.length }} )
+        </button>
+        <button class="btn btn-danger m-1 p-2" (click)="deselectAll()">
+          Deselect All ( {{ siteProjects.length }} )
+        </button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">ProjectID</th>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            [ngStyle]="{
+              'background-color': projectInSite(project.fakeId)
+                ? 'rgb(194, 249, 194)'
+                : 'rgb(255, 207, 207)'
+            }"
+            (click)="toggleProject(project.fakeId)"
+            *ngFor="
+              let project of projects.slice(
+                projectsPerPage * (pageNumber - 1),
+                projectsPerPage * pageNumber
+              )
+            "
+          >
+            <th scope="row">
+              <ng-container
+                *ngIf="projectInSite(project.fakeId); else notIncluded"
+              >
+                <mat-icon class="icon-display p-1 m-1" style="color: green"
+                  >check</mat-icon
+                >
+              </ng-container>
+              <ng-template #notIncluded>
+                <mat-icon
+                  class="icon-display p-1 m-1"
+                  style="color: rgb(138, 0, 0)"
+                  >close</mat-icon
+                >
+              </ng-template>
+            </th>
+            <td><img src="{{ project.src }}" width="30" height="30" /></td>
+            <td>{{ project.projectId }}</td>
+            <td>{{ project.projectName }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-8 text-center">
+            <div
+              *ngIf="projects.length > 0"
+              class="d-flex justify-content-between align-items-center"
+            >
+              <button
+                class="col btn btn-outline-secondary"
+                (click)="decreasePage()"
+              >
+                &lt;
+              </button>
+              <div class="col">Page {{ pageNumber }} / {{ totalPages }}</div>
+              <button
+                class="col btn btn-outline-secondary"
+                (click)="increasePage()"
+              >
+                &gt;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h3 class="text-center p-1">Site Details</h3>
+      <form (submit)="submitForm($event)">
+        <div class="form-group p-1 m-1">
+          <label for="siteName">Site Name</label>
+          <input
+            #siteName
+            type="text"
+            class="form-control"
+            id="siteName"
+            placeholder="Enter Name"
+            (input)="updateSiteName($event)"
+            autocomplete="off"
+          />
+          <div class="invalid-feedback">Please enter a valid site name.</div>
+        </div>
+        <div class="form-group p-1 m-1">
+          <label for="siteWebsite">Site Website</label>
+          <input
+            #siteWebsite
+            type="text"
+            class="form-control"
+            id="siteWebsite"
+            placeholder="Enter Website"
+            (input)="updateSiteWebsite($event)"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group p-1 m-1">
+          <label for="siteDescription">Site Description</label>
+          <textarea
+            #siteDescription
+            type="text"
+            class="form-control"
+            id="siteDescription"
+            placeholder="Enter Description"
+            (input)="updateSiteDescription($event)"
+            rows="3"
+            autocomplete="off"
+          ></textarea>
+        </div>
+        <div class="text-center">
+          <button #submitButton type="submit" class="btn btn-primary">
+            {{ retrievedSite ? "Update Site" : "Create Site" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

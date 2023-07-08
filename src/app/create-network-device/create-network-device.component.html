@@ -1,0 +1,77 @@
+<div class="text-center">
+  <h1>{{ (this.deviceId != null)? 'Update Device' : 'Create Device' }}</h1>
+</div>
+<div class="container d-flex w-100">
+  <div class="col col-2"></div>
+  <div class="col col-8 justify-content-center align-items-center">
+    <form (submit)="submitForm($event)">
+      <div class="form-group p-1 m-1">
+        <label for="deviceName">Device Name</label>
+        <input
+          #deviceName
+          type="text"
+          class="form-control"
+          id="siteName"
+          placeholder="Enter Name"
+          (input)="updateDeviceName($event)"
+          autocomplete="off"
+        />
+        <div class="invalid-feedback">Please enter a valid device name.</div>
+      </div>
+      <div class="form-group p-1 m-1">
+        <label for="deviceMAC">Device MAC</label>
+        <input
+          #deviceMAC
+          type="text"
+          class="form-control"
+          id="siteWebsite"
+          placeholder="Enter MAC"
+          (input)="updateDeviceMAC($event)"
+          autocomplete="off"
+        />
+      </div>
+      <div class="form-group p-1 m-1">
+        <label for="deviceUUIDs">Device UUIDs</label>
+        <input
+          #deviceUUIDs
+          type="text"
+          class="form-control"
+          id="deviceUUIDs"
+          placeholder="Enter UUIDs"
+          (input)="updateDeviceUUIDs($event)"
+          autocomplete="off"
+        />
+      </div>
+      <div class="form-group p-1 m-1">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="isPublic"
+          (change)="updateIsPublic($event)"
+        />
+        <label style="margin-left: 10px" for="isPublic" class="checkbox-inline"
+          >Is Public</label
+        >
+      </div>
+      <div class="form-group p-1 m-1">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="isBluetooth"
+          (change)="updateIsBluetooth($event)"
+        />
+        <label
+          style="margin-left: 10px"
+          for="isBluetooth"
+          class="checkbox-inline"
+          >Is Bluetooth</label
+        >
+      </div>
+      <div class="text-center">
+        <button #submitButton type="submit" class="btn btn-primary">
+          {{ (this.deviceId != null) ? 'Update' : 'Create'  }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

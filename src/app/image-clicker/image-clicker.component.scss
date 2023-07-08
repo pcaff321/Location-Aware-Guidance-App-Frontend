@@ -1,0 +1,12 @@
+.vertex {
+  background-color: gold;
+}
+
+.connection {
+  stroke: yellow;
+  opacity: 0.2;
+}
+
+.directed {
+    marker-end: url(#triangle);
+}
